@@ -261,7 +261,7 @@ module GELF
       hash.keys.each do |key|
         value, key_s = hash.delete(key), key.to_s
         raise ArgumentError.new("Both #{key.inspect} and #{key_s} are present.") if hash.key?(key_s)
-        value = stringify_keys(value) if value.is_a?(Hash)
+        value = stringify_keys(value.dup) if value.is_a?(Hash)
         hash[key_s] = value
       end
       hash
